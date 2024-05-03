@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { IFile } from "../interfaces";
 import { RightArrowIcon } from "./svg/RightArrowIcon";
-import FileIcone from "./svg/fileIcon";
 import { ButtomIcon } from "./svg/ButtomIcon";
-import FolderIcon from "./svg/folderIcon";
+import RenderFileIcon from "./RenderFileIcon";
+
 
 interface IProp{
     fileTree:IFile
@@ -15,20 +15,24 @@ const RecursiveComponent = ({fileTree:{isFolder,name,children}}:IProp)=>{
 
     // handlers
     const tagle = ()=>setIsOpen(prev => !prev)
-    return <>
-    <div className="mb-2 ml-2">
+
+    return (
+    <div className="mb-2 ml-2 cursor-pointer">
         <div className="flex item-center mb-1">
             {isFolder ? (
                 <div onClick={tagle} className="flex item-center">
+                    <span className="mr-1">
                     {isOpen ? <ButtomIcon/> : <RightArrowIcon/>}
-                    <FolderIcon/>
+                    </span>
+                    
+                    <RenderFileIcon fileName={name} isFolder={isFolder} isOpen={isOpen}/>
                     <span className="cursor-pointer select-none	">
                     {name}
                     </span>
                 </div>
             ):(<div className="flex item-center mr-2 ">
-            <FileIcone/>
-            <span className="cursor-pointer select-none	ml-2">
+                    <RenderFileIcon fileName={name} isOpen={isOpen} isFolder={isFolder}/>
+            <span className="select-none ml-2">
                 {name}
             </span>
             </div>)}
@@ -38,7 +42,7 @@ const RecursiveComponent = ({fileTree:{isFolder,name,children}}:IProp)=>{
             isOpen && children && children.map((file,idx) => <RecursiveComponent fileTree={file} key={idx}/>)
         }
     </div>
-    </>
+    )
 };
 
 export default RecursiveComponent
