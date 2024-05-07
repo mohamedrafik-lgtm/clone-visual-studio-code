@@ -1,34 +1,42 @@
 import { IFile } from "../interfaces";
-
+import {v4 as uuid} from "uuid"
 export const fileTree:IFile = {
+    id: uuid(),
     name:"vs code clone",
     isFolder:true,
     children:[
         {
+            id: uuid(),
             name:"node_modules",
             isFolder:true,
-            children:[{name:".svg",isFolder:true,children:[{name:"react.tsx",
+            children:[{id: uuid(),name:".svg",isFolder:true,children:[{id: uuid(),name:"react.tsx",
                         isFolder:false}],
                     },
                     ],
         },
-        {name:".src",isFolder:true,children:[{name:"components",isFolder:true,children:[{name:"index.js",isFolder:false}]},
+        {id: uuid(),name:".src",isFolder:true,children:[{id: uuid(),name:"components",isFolder:true,children:[{id: uuid(),name:"index.js",isFolder:false}]},
         {
+            id: uuid(),
             name:"redux",isFolder:true,children:[
-                {name:"userData.ts",isFolder:false}
+                {id: uuid(),name:"userData.ts",isFolder:false}
             ]
-        },{name:"react.tsx",
+        },{id: uuid(),name:"react.tsx",
                         isFolder:false}],
                     },
         {
+            id: uuid(),
             name:"public",
             isFolder:true,
-            children:[{name:"index.ts",isFolder:false}]
+            children:[{id: uuid(),name:"index.ts",isFolder:false}]
         },
                         {
+                            id: uuid(),
                             name:"index.html",
                             isFolder:false
                         },
         
     ]
 }
+
+
+

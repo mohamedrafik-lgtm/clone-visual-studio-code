@@ -6,6 +6,7 @@ import RenderFileIcon from "./RenderFileIcon";
 import { useDispatch, useSelector } from "react-redux";
 import { setOpenedFile } from "../app/retuers/TreeSlice";
 import { RootState } from "../app/store";
+import { doesFileObjectExist } from "../utils/functions";
 
 
 interface IProp{
@@ -13,13 +14,19 @@ interface IProp{
 }
 
 const RecursiveComponent = ({fileTree}:IProp)=>{
-    const {isFolder,name,children} = fileTree
+    const {id,isFolder,name,children} = fileTree
     const dispatch = useDispatch()
     const {openedFile} = useSelector((state:RootState) => state.tree)
     const [isOpen,setIsOpen] = useState<boolean>(false)
 
     // handlers
     const tagle = ()=>setIsOpen(prev => !prev)
+    
+    const onFileClick = ()=> {
+        const exists = doesFileObjectExist(openedFile,id)
+        if (exists) return;
+        dispatch(setOpenedFile([...openedFile,fileTree]))
+    }
 
     return (
     <div className="mb-2 ml-2 cursor-pointer">
@@ -35,8 +42,8 @@ const RecursiveComponent = ({fileTree}:IProp)=>{
                     {name}
                     </span>
                 </div>
-            ):(<div className="flex item-center ml-2" onClick={()=>dispatch(setOpenedFile([...openedFile,fileTree]))}>
-                    <RenderFileIcon fileName={name} isOpen={isOpen} isFolder={isFolder}/>
+            ):(<div className="flex item-center ml-2" onClick={onFileClick}>
+                    <RenderFileIcon fileName={name}/>
             <span className="select-none ml-2">
                 {name}
             </span>
