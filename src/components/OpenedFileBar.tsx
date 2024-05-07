@@ -8,9 +8,9 @@ const OpenedFileBar = () => {
 
     return (
         <div>
-            <ul className="flex item-center">
+            <div className="flex item-center border-b border-gray-500">
                 {openedFile.map((file) => ( <OpenedFileBarIcon file={file} key={file.id}/>))}
-            </ul>
+            </div>
         </div>
     )
 }
