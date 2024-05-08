@@ -1,14 +1,24 @@
 import SyntaxHighlighter from 'react-syntax-highlighter';
-import { docco } from 'react-syntax-highlighter/dist/esm/styles/hljs';
+import { atomOneDark } from 'react-syntax-highlighter/dist/esm/styles/hljs';
 
 interface IProp {
-    fileContent: string | null
+    content: string
 }
-const FileContentComponent = ({}:IProp) => {
-  const codeString = '(num) => num + 1';
+const FileContentComponent = ({content}:IProp) => {
   return (
-    <SyntaxHighlighter language="javascript" style={docco}>
-      {codeString}
+    <SyntaxHighlighter language="javascript" 
+    style={atomOneDark}
+    Language="javascript"
+    customStyle={{
+      backgroundColor:"transparent",
+      width:"100%",
+      maxHeight:"100vh",
+      overflow:"auto",
+      fontSize:"1.5rem",
+    }}
+    showLineNumbers
+    >
+      {String(content)}
     </SyntaxHighlighter>
   );
 };

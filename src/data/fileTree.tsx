@@ -14,7 +14,14 @@ export const fileTree:IFile = {
                     },
                     ],
         },
-        {id: uuid(),name:".src",isFolder:true,children:[{id: uuid(),name:"components",isFolder:true,children:[{id: uuid(),name:"index.js",isFolder:false}]},
+        {id: uuid(),name:".src",isFolder:true,children:[{id: uuid(),name:"components",isFolder:true,children:[{id: uuid(),name:"index.js",isFolder:false,
+            content:`const onFileClick = ()=> {
+                const exists = doesFileObjectExist(openedFile,id)
+                dispatch(setClickedFile({fileContent:content,fileName:name,activTabId:id}))
+                if (exists) return;
+                dispatch(setOpenedFile([...openedFile,fileTree]))
+            }`
+        }]},
         {
             id: uuid(),
             name:"redux",isFolder:true,children:[

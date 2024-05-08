@@ -50,11 +50,13 @@ const RecursiveComponent = ({fileTree}:IProp)=>{
             </span>
             </div>)}
         
+        
         </div>
         {
             isOpen && children && children.map((file,idx) => <RecursiveComponent fileTree={file} key={idx}/>)
         }
     </div>
+                
     )
 };
 
