@@ -19,7 +19,13 @@ const OpenedFileBarIcon = ({file}:IProp) => {
     }
     const onRemove = (selictedId:string) =>{
         const filtered = openedFile.filter(file => file.id !== selictedId)
-        const {id,name,content} = filtered[filtered.length - 1]
+        const lastTab = filtered[filtered.length - 1]
+        if(!lastTab){
+            dispatch(setOpenedFile([]))
+            dispatch(setClickedFile({activTabId:null,fileContent:"",fileName:""}))
+            return;
+        }
+        const {id,name,content} = lastTab
         dispatch(setOpenedFile(filtered))
         dispatch(setClickedFile({activTabId:id,fileContent:content,fileName:name}))
     }
