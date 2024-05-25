@@ -1,11 +1,11 @@
-import { svgStyle } from "../style"
 
 interface IProp{
     src: string,
+    className?:string
 }
 
-const IconImg = ({src}:IProp)=>{
-    return <img src={src} {...svgStyle} className="mr-2"/>
+const IconImg = ({src , className="w-6 h-6"}:IProp)=>{
+    return <img src={src}  className={className}/>
 }
 
 export default IconImg

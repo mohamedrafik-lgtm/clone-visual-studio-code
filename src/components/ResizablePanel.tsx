@@ -7,7 +7,7 @@ interface IProp {
     rightPanel:ReactNode,
     showLeftPanel:boolean
 }
-const ResizeablePanel = ({defaultLayout = [33,67],leftPanel, rightPanel,showLeftPanel}:IProp) => {
+const ResizablePanel = ({defaultLayout = [33,67],leftPanel, rightPanel,showLeftPanel}:IProp) => {
     const onLayout = (size:number[])=>{
         document.cookie = `react-resizable-panels:layout=${JSON.stringify(size)}`
     }
@@ -25,4 +25,4 @@ const ResizeablePanel = ({defaultLayout = [33,67],leftPanel, rightPanel,showLeft
     )
 }
 
-export default ResizeablePanel
+export default ResizablePanel
