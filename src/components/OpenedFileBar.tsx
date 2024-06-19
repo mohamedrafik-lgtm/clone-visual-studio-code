@@ -19,7 +19,7 @@ const OpenedFileBar = () => {
             >
                 {openedFile.map((file) => ( <OpenedFileBarIcon file={file} key={file.id}/>))}
             </div>
-            {showMenu && <DropMenu positions={menuPosition}/>}
+            {showMenu && <DropMenu positions={menuPosition} SetShowMenu={SetShowMenu}/>}
         </div>
     )
 }
