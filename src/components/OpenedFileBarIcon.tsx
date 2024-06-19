@@ -4,8 +4,6 @@ import RenderFileIcon from "./RenderFileIcon"
 import { CloseIcon } from "./svg/ClosIcon"
 import { setClickedFile, setOpenedFile } from "../app/retuers/TreeSlice"
 import { RootState } from "../app/store"
-import { useState } from "react"
-import DropMenu from "./ui/DropMenu"
 
 interface IProp{
 file:IFile,
@@ -13,8 +11,7 @@ file:IFile,
 
 const OpenedFileBarIcon = ({file}:IProp) => {
     const dispatch = useDispatch()
-    const[menuPosition,setMenuPosition]= useState<{x:number,y:number}>({x:0,y:0})
-    const [showMenu,SetShowMenu] = useState(false)
+    
     const {openedFile,clickedFile:{activTabId}} = useSelector((state:RootState) => state.tree)
     // handlers
     const onClick = () => {
@@ -35,11 +32,7 @@ const OpenedFileBarIcon = ({file}:IProp) => {
     }
     return (
         <div className={`flex item-center p-2 border-t-2 ${file.id === activTabId ? "border-[#cf6ccf]" : "border-transparent"}`} onClick={onClick}
-        onContextMenu={(e)=>{
-            e.preventDefault()
-            setMenuPosition({x:e.clientX,y:e.clientY})
-            SetShowMenu(true)
-        }}
+      
         >
                 <RenderFileIcon fileName={file.name} />
             <span className="cursor-pointer duration-300 flex justify-center item-center wx-2 mr-2 p-1 rounded-md" >
@@ -52,7 +45,7 @@ const OpenedFileBarIcon = ({file}:IProp) => {
             }}> 
                 <CloseIcon/>
             </span>
-            {showMenu && <DropMenu positions={menuPosition}/>}
+            
         </div>
     )
 }
