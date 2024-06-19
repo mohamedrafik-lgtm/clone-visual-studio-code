@@ -17,6 +17,7 @@ function App() {
             
             <ResizablePanel leftPanel={<div className='w-64 p-2'>
               <RecursiveComponent fileTree={fileTree}/>
+              
             </div>}
             rightPanel={openedFile.length? <Preview/> : <WelcomeTab/>}
             showLeftPanel/>
