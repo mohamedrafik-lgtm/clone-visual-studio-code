@@ -1,4 +1,8 @@
 import { useEffect, useRef } from "react"
+import { setOpenedFile } from "../../app/retuers/TreeSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../app/store";
+
 
 interface IProp{
     SetShowMenu:(val:boolean) => void;
@@ -10,7 +14,19 @@ interface IProp{
 
 
 const DropMenu = ({positions,SetShowMenu}:IProp) => {
+    const dispatch = useDispatch()
     const menuRef = useRef<HTMLDivElement>(null)
+    const {openedFile,tapIdToRemove} = useSelector((state:RootState) => state.tree)
+    // handlers
+    const closeAll = () =>{
+        dispatch(setOpenedFile([]))
+        SetShowMenu(false)
+    }
+    const onClose = ()=>{
+        const filtered = openedFile.filter(file => file.id !== tapIdToRemove)
+        dispatch(setOpenedFile(filtered))
+        SetShowMenu(false)
+    }
     useEffect(()=>{
         const handelClickOutside = (event:MouseEvent) => {
             if(menuRef.current && !menuRef.current.contains(event.target as Node)) {
@@ -33,8 +49,8 @@ const DropMenu = ({positions,SetShowMenu}:IProp) => {
             top:positions.y,
             
            }}>
-            <li>close</li>
-            <li>close all</li>
+            <li onClick={onClose} className="cursor-pointer">close</li>
+            <li onClick={closeAll} className="cursor-pointer">close all</li>
            </ul>
            </div>
         
@@ -43,3 +59,6 @@ const DropMenu = ({positions,SetShowMenu}:IProp) => {
 
 
 export default DropMenu
+
+
+

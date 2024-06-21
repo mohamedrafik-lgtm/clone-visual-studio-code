@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { IFile } from "../interfaces"
 import RenderFileIcon from "./RenderFileIcon"
 import { CloseIcon } from "./svg/ClosIcon"
-import { setClickedFile, setOpenedFile } from "../app/retuers/TreeSlice"
+import { setClickedFile, setOpenedFile, setTapIdToRemove } from "../app/retuers/TreeSlice"
 import { RootState } from "../app/store"
 
 interface IProp{
@@ -32,7 +32,12 @@ const OpenedFileBarIcon = ({file}:IProp) => {
     }
     return (
         <div className={`flex item-center p-2 border-t-2 ${file.id === activTabId ? "border-[#cf6ccf]" : "border-transparent"}`} onClick={onClick}
-      
+        onContextMenu={e =>{
+            e.preventDefault()
+            dispatch(setTapIdToRemove(file.id))
+        }
+
+        }
         >
                 <RenderFileIcon fileName={file.name} />
             <span className="cursor-pointer duration-300 flex justify-center item-center wx-2 mr-2 p-1 rounded-md" >
